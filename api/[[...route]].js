@@ -77,7 +77,7 @@ export default async function handler(req, res) {
           }
         )
       );
-      return res.status(200).json({ redirect: "/editor" });
+      return res.status(200).json({ redirect: "" });
     }
 
     // logout
@@ -118,19 +118,6 @@ export default async function handler(req, res) {
 
     //////////////////
     
-    if (path.endsWith("/getstatus")) {
-      const user_status = state.status[auth_user];
-      let isctd = false;
-      if (user_status) {
-        isctd = user_status.value;
-        if (Date.now() - user_status.lastUpdate > 15000) {
-          state.status[auth_user].value = false;
-          isctd = false;
-        }
-      }
-      return res.status(200).json({ user: auth_user, status: isctd });
-    }
-
 
     if (path.endsWith("/cstatus")) {
       if (req.method !== "POST")
